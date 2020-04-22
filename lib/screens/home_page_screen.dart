@@ -26,8 +26,21 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FilterList(0)
+          FilterList(0),
+          SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Próximas tarefas',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+                fontSize: 24.0
+              ),
+            ),
+          )
         ],
       ),
     );
