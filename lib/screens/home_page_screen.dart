@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskinator/widgets/filter_list.dart';
+import 'package:taskinator/widgets/tasks_list.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -30,17 +31,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           FilterList(0),
           SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              'Próximas tarefas',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black54,
-                fontSize: 24.0
-              ),
-            ),
-          )
+          TasksList('')
         ],
       ),
     );

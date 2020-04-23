@@ -11,7 +11,7 @@ class FilterList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50.0,
-      child: ListView(
+      child: ListView(      //TODO: Mudar para lista dinâmica
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           FilterElement('Todos', true),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskinator/components/my_box_shadow.dart';
 
 class FilterElement extends StatelessWidget {
 
@@ -15,12 +16,7 @@ class FilterElement extends StatelessWidget {
         onTap: (){},
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[350],
-                blurRadius: 8.0,
-              ),
-            ],
+            boxShadow: MyBoxShadow(),
             borderRadius: BorderRadius.circular(15),
             color: isSelected ? Theme.of(context).accentColor : Colors.grey[200],
           ),
