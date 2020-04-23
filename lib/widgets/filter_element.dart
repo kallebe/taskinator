@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/models/filter_model.dart';
 
 class FilterElement extends StatelessWidget {
 
-  final String title;
+  final FilterModel filter;
   final bool isSelected;
 
-  FilterElement(this.title, this.isSelected);
+  FilterElement(this.filter, this.isSelected);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,11 @@ class FilterElement extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: MyBoxShadow(),
             borderRadius: BorderRadius.circular(15),
-            color: isSelected ? Theme.of(context).accentColor : Colors.grey[200],
+            color: isSelected ? filter.color : Colors.grey[200],
           ),
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
           child: Text(
-            title,
+            filter.titulo,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: isSelected ? Colors.white : Colors.black87,

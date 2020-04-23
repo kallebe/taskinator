@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/widgets/filter_element.dart';
 
 class FilterList extends StatelessWidget {
@@ -9,17 +10,23 @@ class FilterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<FilterModel> filters = [
+      FilterModel('Todos', Theme.of(context).accentColor),
+      FilterModel('Estudo', Colors.blueAccent),
+      FilterModel('Hobbies', Colors.orange),
+      FilterModel('Shopping', Colors.teal),
+      FilterModel('Metas', Colors.amber),
+    ];
+
     return SizedBox(
       height: 50.0,
-      child: ListView(      //TODO: Mudar para lista dinâmica
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          FilterElement('Todos', true),
-          FilterElement('Estudo', false),
-          FilterElement('Hobbies', false),
-          FilterElement('Shopping', false),
-          FilterElement('Metas', false),
-        ],
+        itemCount: filters.length,
+        itemBuilder: (context, index) {
+          return FilterElement(filters[index], index == this.currentFilter);
+        },
       ),
     );
   }

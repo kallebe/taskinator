@@ -9,6 +9,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80.0),
         child: SafeArea(
