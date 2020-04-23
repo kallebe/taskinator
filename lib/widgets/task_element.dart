@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/models/task_model.dart';
 
 class TaskElement extends StatelessWidget {
 
-  TaskElement(this.titulo);
+  TaskElement(this.task) : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
 
-  final String titulo;    //TODO: Mudar para objeto
+  final String dateDeliver;
+
+  final TaskModel task;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,39 +24,42 @@ class TaskElement extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                titulo, //* Título da tarefa
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                  color: Colors.black87
-                ),
-              ),
-              SizedBox(height: 4.0),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.timer,
-                    color: Colors.grey,
-                    size: 18.0,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  task.title, //* Título da tarefa
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: Colors.black87
                   ),
-                  Text(
-                    "14h30",  //* Data de entrega
-                    style: TextStyle( color: Colors.grey ),
-                  )
-                ],
-              )
-            ],
+                ),
+                SizedBox(height: 4.0),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.timer,
+                      color: Colors.grey,
+                      size: 18.0,
+                    ),
+                    Text(
+                      dateDeliver,  //* Data de entrega
+                      style: TextStyle( color: Colors.grey ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
           Container(
             width: 8.0,
             height: 32.0,
             decoration: BoxDecoration(
-              color: Colors.amber, //TODO: Filter color
+              color: task.filter.color,
               borderRadius: BorderRadius.circular(4.0)
             ),
           )

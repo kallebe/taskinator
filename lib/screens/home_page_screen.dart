@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
 
   final PageController filterController = PageController();
 
@@ -38,7 +50,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           FilterList(0),
           SizedBox(height: 20.0),
-          TasksList('')
+          TasksList()
         ],
       ),
     );
