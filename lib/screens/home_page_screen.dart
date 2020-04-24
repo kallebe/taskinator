@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:taskinator/helpers/filter_helper.dart';
+import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';
 
@@ -22,7 +24,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          FilterHelper().createFilter(FilterModel("Estudos", Colors.orange));
+          FilterHelper().getFilters().then((list) => print(list.toString()));
+        },
         child: Icon(
           Icons.add,
           color: Colors.white,

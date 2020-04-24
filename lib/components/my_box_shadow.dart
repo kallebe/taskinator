@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-List<BoxShadow> MyBoxShadow() {
+List<BoxShadow> MyBoxShadow({Color color}) {
   return [
     BoxShadow(
-      color: Colors.grey[350],
+      color: color ?? Colors.grey[350],
       blurRadius: 8.0,
     )
   ];

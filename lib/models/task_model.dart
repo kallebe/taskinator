@@ -1,13 +1,28 @@
+import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
 
 class TaskModel {
-  String _title;
-  FilterModel _filter;
-  DateTime _deliver;
+  int id;
+  String title;
+  FilterModel filter;
+  DateTime deliver;
 
-  TaskModel(this._title, this._filter, this._deliver);
+  TaskModel(this.title, this.filter, this.deliver);
 
-  String get title => _title;
-  FilterModel get filter => _filter;
-  DateTime get deliver => _deliver;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'filter_id': filter.id,
+      'deliver': deliver.millisecondsSinceEpoch
+    };
+  }
+
+  TaskModel.fromMap(Map<String, dynamic> data) {
+    FilterHelper helper = new FilterHelper();
+    id = data["id"];
+    title = data["title"];
+    //filter = data["filter_id"];
+    deliver = DateTime.fromMillisecondsSinceEpoch(data["deliver"]);
+  }
 }

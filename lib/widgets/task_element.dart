@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:taskinator/components/my_box_shadow.dart';
 import 'package:taskinator/models/task_model.dart';
@@ -9,6 +8,15 @@ class TaskElement extends StatelessWidget {
   TaskElement(this.task) : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
 
   final String dateDeliver;
+
+  Color alertColor() {
+    if (DateTime.now().isAfter(task.deliver))
+      return Colors.redAccent;
+    else if (DateTime.now().isAfter(task.deliver.subtract(Duration(minutes: 30))))
+      return Colors.amber;
+    else
+      return Colors.grey;
+  }
 
   final TaskModel task;
   @override
@@ -43,12 +51,12 @@ class TaskElement extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.timer,
-                      color: Colors.grey,
+                      color: alertColor(),
                       size: 18.0,
                     ),
                     Text(
                       dateDeliver,  //* Data de entrega
-                      style: TextStyle( color: Colors.grey ),
+                      style: TextStyle( color: alertColor() ),
                     )
                   ],
                 )

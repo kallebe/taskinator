@@ -8,13 +8,13 @@ class TasksList extends StatelessWidget {
   List<TaskModel> tasks = [
     TaskModel("Terminar de desenvolver o Taskinator",
       FilterModel('Metas', Colors.amber),
-      DateTime(2020, 4, 25, 18, 0)),
+      DateTime(2020, 4, 23, 18, 0)),
     TaskModel("Comprar um Piano",
       FilterModel('Shopping', Colors.teal),
-      DateTime(2020, 4, 25, 18, 0)),
+      DateTime(2020, 4, 24, 17, 0)),
     TaskModel("Fazer listas de Processamento Digital de Imagens",
       FilterModel('Estudo', Colors.blueAccent),
-      DateTime(2020, 4, 25, 18, 0)),
+      DateTime(2020, 5, 25, 10, 45)),
   ];
 
   @override
