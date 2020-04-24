@@ -5,18 +5,6 @@ import 'package:taskinator/widgets/task_element.dart';
 
 class TasksList extends StatelessWidget {
 
-  List<TaskModel> tasks = [
-    TaskModel("Terminar de desenvolver o Taskinator",
-      FilterModel('Metas', Colors.amber),
-      DateTime(2020, 4, 23, 18, 0)),
-    TaskModel("Comprar um Piano",
-      FilterModel('Shopping', Colors.teal),
-      DateTime(2020, 4, 24, 17, 0)),
-    TaskModel("Fazer listas de Processamento Digital de Imagens",
-      FilterModel('Estudo', Colors.blueAccent),
-      DateTime(2020, 5, 25, 10, 45)),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -35,16 +23,28 @@ class TasksList extends StatelessWidget {
             ),
             SizedBox(height: 18.0),
             Expanded(
-              child: ListView.separated(
-                itemCount: tasks.length,
-                itemBuilder: (context, index) {
-                  return TaskElement(tasks[index]);
-                },
-                separatorBuilder: (context, _) {
-                  return SizedBox(height: 8.0);
+              child: FutureBuilder(
+                future: TaskModel.getTasks(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData && snapshot.connectionState != ConnectionState.done) {
+                    return Center(child: CircularProgressIndicator(),);
+                  } else if (!snapshot.hasData) {
+                    return Center(child: Text('Adicione uma nova Tarefa'));
+                  } else {
+                    return ListView.separated(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        print(snapshot.data[index]);
+                        return TaskElement(snapshot.data[index]);
+                      },
+                      separatorBuilder: (context, _) {
+                        return SizedBox(height: 8.0);
+                      }
+                    );
+                  }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

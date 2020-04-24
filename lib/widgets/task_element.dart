@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/helpers/filter_helper.dart';
+import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
 
 class TaskElement extends StatelessWidget {
 
-  TaskElement(this.task) : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
+  TaskElement(this.task)
+    : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
 
   final String dateDeliver;
 
@@ -19,6 +22,7 @@ class TaskElement extends StatelessWidget {
   }
 
   final TaskModel task;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,13 +67,19 @@ class TaskElement extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: 8.0,
-            height: 32.0,
-            decoration: BoxDecoration(
-              color: task.filter.color,
-              borderRadius: BorderRadius.circular(4.0)
-            ),
+          FutureBuilder(
+            future: FilterHelper().getFilter(task.id),
+            builder: (context, snapshot) {
+              print(snapshot.data);
+              return Container(
+                width: 8.0,
+                height: 32.0,
+                decoration: BoxDecoration(
+                  color: snapshot.hasData ? snapshot.data.color : Colors.white,
+                  borderRadius: BorderRadius.circular(4.0)
+                ),
+              );
+            },
           )
         ],
       ),

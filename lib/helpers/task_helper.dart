@@ -1,5 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:taskinator/helpers/db_helper.dart';
+import 'package:taskinator/helpers/filter_helper.dart';
+import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
 
 class TaskHelper {
@@ -8,13 +10,14 @@ class TaskHelper {
 
   TaskHelper._();
 
-  Future<TaskModel> createFilter(TaskModel task) async {
+  Future<TaskModel> createTask(TaskModel task) async {
     Database database = await DbHelper.internal().db;
-    task.id = await database.insert(tasksTable, task.toMap());
+    int id = await database.insert(tasksTable, task.toMap());
+    task.setId(id);
     return task;
   }
 
-  Future<TaskModel> getFilter(int id) async {
+  Future<TaskModel> getTask(int id) async {
     Database database = await DbHelper.internal().db;
     List<Map> maps = await database.query(
       tasksTable,
@@ -29,7 +32,7 @@ class TaskHelper {
       return null;
   }
 
-  Future<bool> deleteFilter(TaskModel task) async {
+  Future<bool> deleteTask(TaskModel task) async {
     Database database = await DbHelper.internal().db;
     int rows = await database.delete(
       tasksTable,
@@ -39,7 +42,7 @@ class TaskHelper {
     return rows > 0;
   }
 
-  Future<bool> updateFilter(TaskModel task) async {
+  Future<bool> updateTask(TaskModel task) async {
     Database database = await DbHelper.internal().db;
     int rows = await database.update(
       tasksTable,
@@ -50,9 +53,9 @@ class TaskHelper {
     return rows > 0;
   }
 
-  Future<List<TaskModel>> getFilters() async {
+  Future<List<TaskModel>> getTasks() async {
     Database database = await DbHelper.internal().db;
-    List<TaskModel> tasks;
+    List<TaskModel> tasks = [];
     List<Map<String, dynamic>> maps = await database.rawQuery(
       "SELECT * from $tasksTable ORDER BY $tasksDeliverColumn DESC"
     );

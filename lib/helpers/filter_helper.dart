@@ -10,7 +10,8 @@ class FilterHelper {
 
   Future<FilterModel> createFilter(FilterModel filter) async {
     Database database = await DbHelper.internal().db;
-    filter.id = await database.insert(filterTable, filter.toMap());
+    int id = await database.insert(filterTable, filter.toMap());
+    filter.setId(id);
     return filter;
   }
 

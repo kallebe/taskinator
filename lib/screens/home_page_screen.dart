@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:taskinator/helpers/filter_helper.dart';
+import 'package:taskinator/helpers/task_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
+import 'package:taskinator/models/task_model.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';
 
@@ -25,8 +27,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          FilterHelper().createFilter(FilterModel("Estudos", Colors.orange));
-          FilterHelper().getFilters().then((list) => print(list.toString()));
+          TaskHelper().createTask(TaskModel("Fazer lista de PDI", 0, DateTime.now()));
+          TaskHelper().getTasks().then((list) => print(list.toString()));
         },
         child: Icon(
           Icons.add,

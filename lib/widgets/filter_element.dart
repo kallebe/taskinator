@@ -23,7 +23,7 @@ class FilterElement extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
           child: Text(
-            filter.titulo,
+            filter.title,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: isSelected ? Colors.white : Colors.black87,
