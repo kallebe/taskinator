@@ -34,7 +34,6 @@ class TasksList extends StatelessWidget {
                     return ListView.separated(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
-                        print(snapshot.data[index]);
                         return TaskElement(snapshot.data[index]);
                       },
                       separatorBuilder: (context, _) {

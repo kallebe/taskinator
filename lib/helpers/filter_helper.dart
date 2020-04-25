@@ -23,7 +23,7 @@ class FilterHelper {
       where: "$filterIdColumn = ?",
       whereArgs: [id]
     );
-
+    
     if (maps.length > 0)
       return FilterModel.fromMap(maps.first);
     else

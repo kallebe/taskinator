@@ -68,14 +68,13 @@ class TaskElement extends StatelessWidget {
             ),
           ),
           FutureBuilder(
-            future: FilterHelper().getFilter(task.id),
+            future: FilterHelper().getFilter(task.filterId),
             builder: (context, snapshot) {
-              print(snapshot.data);
               return Container(
                 width: 8.0,
                 height: 32.0,
                 decoration: BoxDecoration(
-                  color: snapshot.hasData ? snapshot.data.color : Colors.white,
+                  color: snapshot.hasData ? snapshot.data.color : Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(4.0)
                 ),
               );

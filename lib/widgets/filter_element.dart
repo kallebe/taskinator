@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
 
 class FilterElement extends StatelessWidget {
@@ -15,6 +16,28 @@ class FilterElement extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: (){},
+        onLongPress: () {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text("Editar Categoria"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: (){
+                    FilterHelper().deleteFilter(filter);
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Excluir",
+                    style: TextStyle(
+                      color: Colors.red
+                    ),
+                  )
+                )
+              ],
+            )
+          );
+        },
         child: Container(
           decoration: BoxDecoration(
             boxShadow: MyBoxShadow(),
