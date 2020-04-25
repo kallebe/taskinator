@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:taskinator/components/my_appbar.dart';
 import 'package:taskinator/helpers/task_helper.dart';
 import 'package:taskinator/models/task_model.dart';
+import 'package:taskinator/screens/new_task_screen.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';
 
@@ -25,31 +27,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          TaskHelper().createTask(TaskModel("Fazer lista de PDI", 1, DateTime.now()));
-          TaskHelper().getTasks().then((list) => print(list.toString()));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => NewTask()
+          ));
         },
         child: Icon(
           Icons.add,
           color: Colors.white,
         ),
       ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: AppBar(
-              title: Image.asset(
-                'assets/logo-horizontal.png',
-                fit: BoxFit.scaleDown,
-                height: 50.0,
-              ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-          ),
-        ),
-      ),
+      appBar: myAppBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
