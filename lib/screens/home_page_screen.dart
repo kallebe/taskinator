@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:taskinator/components/my_appbar.dart';
-import 'package:taskinator/helpers/task_helper.dart';
-import 'package:taskinator/models/task_model.dart';
+import 'package:taskinator/components/appbar_component.dart';
 import 'package:taskinator/screens/new_task_screen.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';
@@ -36,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
       ),
-      appBar: myAppBar(context),
+      appBar: appBarComponent(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

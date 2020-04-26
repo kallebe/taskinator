@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget myAppBar(BuildContext context) {
+Widget appBarComponent(BuildContext context) {
   return PreferredSize(
     preferredSize: Size.fromHeight(80.0),
     child: SafeArea(

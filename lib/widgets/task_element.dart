@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/components/box_shadow_component.dart';
 import 'package:taskinator/helpers/filter_helper.dart';
-import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
 
 class TaskElement extends StatelessWidget {
@@ -29,7 +28,7 @@ class TaskElement extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
-        boxShadow: MyBoxShadow(),
+        boxShadow: boxShadowComponent(),
         color: Colors.white,
       ),
       child: Row(

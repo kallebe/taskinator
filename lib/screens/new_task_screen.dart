@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taskinator/components/appbar_component.dart';
 import 'package:taskinator/components/form_field_component.dart';
-import 'package:taskinator/components/my_appbar.dart';
-import 'package:taskinator/components/my_box_shadow.dart';
 import 'package:taskinator/components/select_filter_component.dart';
 import 'package:taskinator/components/text_field_component.dart';
 
@@ -13,7 +12,7 @@ class NewTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context),
+      appBar: appBarComponent(context),
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -21,7 +20,7 @@ class NewTask extends StatelessWidget {
           child: Column(
             children: <Widget>[
               formFieldComponent("Categorias", selectFilterComponent()),
-              formFieldComponent("Título", textFieldComponent(titleController)),
+              formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
             ],
           )
         ),

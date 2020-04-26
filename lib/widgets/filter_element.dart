@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskinator/components/my_box_shadow.dart';
+import 'package:taskinator/components/box_shadow_component.dart';
 import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
 
@@ -40,7 +40,7 @@ class FilterElement extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: MyBoxShadow(),
+            boxShadow: boxShadowComponent(),
             borderRadius: BorderRadius.circular(15),
             color: isSelected ? filter.color : Colors.grey[200],
           ),

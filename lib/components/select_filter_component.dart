@@ -16,7 +16,7 @@ Widget selectFilterComponent() {
         snapshot.data.forEach((f) => filters.add(f));
         return DropdownButton(
           onChanged: (_) {},
-          hint: Text("Escolha uma categoria"),
+          hint: Text("Escolha uma"),
           isExpanded: true,
           items: filters.map((filter) {
             return DropdownMenuItem<int>(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'my_box_shadow.dart';
+import 'package:taskinator/components/box_shadow_component.dart';
 
 Widget formFieldComponent(String text, Widget child) {
   return Row(
@@ -19,10 +19,12 @@ Widget formFieldComponent(String text, Widget child) {
             margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
             decoration: BoxDecoration(
-                boxShadow: MyBoxShadow(),
+                boxShadow: boxShadowComponent(),
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0)),
-            child: child),
+                borderRadius: BorderRadius.circular(10.0)
+            ),
+          child: child
+        ),
       )
     ],
   );
