@@ -14,27 +14,24 @@ class NewTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarComponent(context),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              formFieldComponent("Categoria", selectFilterComponent()),
-              formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
-              datePickerComponent(context),
-              SizedBox(height: 16.0,),
-              RaisedButton(
-                onPressed: (){},
-                color: Theme.of(context).accentColor,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                textColor: Colors.white,
-                child: Text("CRIAR TAREFA"),
-              )
-            ],
-          )
-        ),
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: EdgeInsets.all(16.0),
+          children: <Widget>[
+            formFieldComponent("Categoria", selectFilterComponent()),
+            formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
+            datePickerComponent(context),
+            SizedBox(height: 16.0,),
+            RaisedButton(
+              onPressed: (){},
+              color: Theme.of(context).accentColor,
+              padding: EdgeInsets.symmetric(vertical: 16.0),
+              textColor: Colors.white,
+              child: Text("CRIAR TAREFA"),
+            )
+          ],
+        )
       ),
     );
   }
