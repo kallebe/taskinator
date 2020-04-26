@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:taskinator/stores/task_form_store.dart';
 
 import 'box_shadow_component.dart';
 
-Widget datePickerComponent(BuildContext context) {
-  DateTime _selectedDate = DateTime.now();
-  TimeOfDay _selectedTime = TimeOfDay.now();
+Widget datePickerComponent(BuildContext context, {TaskForm taskForm}) {
 
   final DateFormat dateFormatter = DateFormat("dd/MM/yyyy");
   final DateFormat timeFormatter = DateFormat("hh'h'mm");
@@ -22,7 +22,7 @@ Widget datePickerComponent(BuildContext context) {
         child: Row(
           children: <Widget>[
             GestureDetector(
-              onTap: () => _pickDate(context, _selectedDate),
+              onTap: () => _pickDate(context, taskForm: taskForm),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 16.0),
                 decoration: BoxDecoration(
@@ -39,13 +39,16 @@ Widget datePickerComponent(BuildContext context) {
                     SizedBox(
                       width: 8.0,
                     ),
-                    Text("${dateFormatter.format(_selectedDate)}"),
+                    Observer(builder: (_) {
+                      return Text(
+                          "${dateFormatter.format(taskForm.deliverDate)}");
+                    }),
                   ],
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () => _pickTime(context, _selectedTime),
+              onTap: () => _pickTime(context, taskForm: taskForm),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 16.0),
                 margin: EdgeInsets.only(left: 16.0),
@@ -63,8 +66,11 @@ Widget datePickerComponent(BuildContext context) {
                     SizedBox(
                       width: 8.0,
                     ),
-                    Text(
-                        "${timeFormatter.format(DateTime(2020, 1, 1, _selectedTime.hour, _selectedTime.minute))}"),
+                    Observer(builder: (_) {
+                      TimeOfDay _selectedTime = taskForm.deliverTime;
+                      return Text(
+                          "${timeFormatter.format(DateTime(2020, 1, 1, _selectedTime.hour, _selectedTime.minute))}");
+                    }),
                   ],
                 ),
               ),
@@ -76,7 +82,7 @@ Widget datePickerComponent(BuildContext context) {
   );
 }
 
-Future<Null> _pickDate(BuildContext context, DateTime selectedDate) async {
+Future<Null> _pickDate(BuildContext context, {TaskForm taskForm}) async {
   DateTime _now = DateTime.now();
 
   final DateTime picked = await showDatePicker(
@@ -84,19 +90,14 @@ Future<Null> _pickDate(BuildContext context, DateTime selectedDate) async {
       initialDate: _now,
       firstDate: DateTime(_now.year - 3),
       lastDate: DateTime(_now.year + 3));
-  // if (picked != null && picked != selectedDate)
-  // setState(() {
-  //   selectedDate = picked;
-  // });
+  if (picked != null && picked != taskForm.deliverDate)
+    taskForm.selectDate(picked);
 }
 
-Future<Null> _pickTime(BuildContext context, TimeOfDay _) async {
+Future<Null> _pickTime(BuildContext context, {TaskForm taskForm}) async {
   TimeOfDay _now = TimeOfDay.now();
 
   final TimeOfDay picked =
       await showTimePicker(context: context, initialTime: _now);
-  // if (picked != null && picked != selectedDate)
-  // setState(() {
-  //   selectedDate = picked;
-  // });
-}
+  if (picked != null && picked != taskForm.deliverTime)
+    taskForm.selectTime(picked);

@@ -4,9 +4,10 @@ import 'package:taskinator/components/date_picker_component.dart';
 import 'package:taskinator/components/form_field_component.dart';
 import 'package:taskinator/components/select_filter_component.dart';
 import 'package:taskinator/components/text_field_component.dart';
+import 'package:taskinator/stores/task_form_store.dart';
 
 class NewTask extends StatelessWidget {
-
+  final TaskForm taskForm = TaskForm();
   final _formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
 
@@ -19,9 +20,9 @@ class NewTask extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: <Widget>[
-            formFieldComponent("Categoria", selectFilterComponent()),
+            formFieldComponent("Categoria", selectFilterComponent(taskForm: taskForm)),
             formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
-            datePickerComponent(context),
+            datePickerComponent(context, taskForm: taskForm),
             SizedBox(height: 16.0,),
             RaisedButton(
               onPressed: (){},
