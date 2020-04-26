@@ -5,7 +5,7 @@ Widget textFieldComponent(TextEditingController controller, {String hint}) {
     controller: controller,
     decoration: InputDecoration(
       hintText: hint ?? "",
-      border: InputBorder.none
+      border: InputBorder.none,
     ),
   );
 }

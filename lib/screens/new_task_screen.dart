@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskinator/components/appbar_component.dart';
+import 'package:taskinator/components/date_picker_component.dart';
 import 'package:taskinator/components/form_field_component.dart';
 import 'package:taskinator/components/select_filter_component.dart';
 import 'package:taskinator/components/text_field_component.dart';
@@ -21,6 +22,7 @@ class NewTask extends StatelessWidget {
             children: <Widget>[
               formFieldComponent("Categorias", selectFilterComponent()),
               formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
+              datePickerComponent(context),
             ],
           )
         ),

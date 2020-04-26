@@ -17,6 +17,7 @@ Widget selectFilterComponent() {
         return DropdownButton(
           onChanged: (_) {},
           hint: Text("Escolha uma"),
+          underline: SizedBox(height: 0,),
           isExpanded: true,
           items: filters.map((filter) {
             return DropdownMenuItem<int>(
