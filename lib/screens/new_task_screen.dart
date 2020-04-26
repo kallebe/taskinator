@@ -19,10 +19,19 @@ class NewTask extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              formFieldComponent("Categorias", selectFilterComponent()),
+              formFieldComponent("Categoria", selectFilterComponent()),
               formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
               datePickerComponent(context),
+              SizedBox(height: 16.0,),
+              RaisedButton(
+                onPressed: (){},
+                color: Theme.of(context).accentColor,
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                textColor: Colors.white,
+                child: Text("CRIAR TAREFA"),
+              )
             ],
           )
         ),

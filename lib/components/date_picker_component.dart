@@ -44,7 +44,6 @@ Widget datePickerComponent(BuildContext context) {
       GestureDetector(
         onTap: () => _pickTime(context, _selectedTime),
         child: Container(
-          margin: EdgeInsets.only(right: 16.0),
           padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 16.0),
           decoration: BoxDecoration(
             boxShadow: boxShadowComponent(),

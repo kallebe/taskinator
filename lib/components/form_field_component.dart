@@ -10,13 +10,15 @@ Widget formFieldComponent(String text, Widget child) {
         flex: 1,
         child: Text(
           text,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
         ),
       ),
       Flexible(
         flex: 3,
         child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            margin: EdgeInsets.fromLTRB(16.0, 8.0, 0.0, 8.0),
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
             decoration: BoxDecoration(
                 boxShadow: boxShadowComponent(),

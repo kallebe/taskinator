@@ -16,13 +16,15 @@ Widget selectFilterComponent() {
         snapshot.data.forEach((f) => filters.add(f));
         return DropdownButton(
           onChanged: (_) {},
-          hint: Text("Escolha uma"),
           underline: SizedBox(height: 0,),
+          value: filters[0].id,
           isExpanded: true,
           items: filters.map((filter) {
             return DropdownMenuItem<int>(
               value: filter.id,
-              child: Text(filter.title),
+              child: Text(
+                filter.title
+              ),
             );
           }).toList(),
         );
