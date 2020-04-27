@@ -1,51 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:taskinator/models/filter_model.dart';
-import 'package:taskinator/models/task_model.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:taskinator/stores/tasks_store.dart';
 import 'package:taskinator/widgets/task_element.dart';
 
 class TasksList extends StatelessWidget {
+  final TasksStore tasksStore = TasksStore();
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              'Próximas tarefas', //TODO: Checar se lista está vazia
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 24.0),
-            ),
-            SizedBox(height: 18.0),
-            Expanded(
-              child: FutureBuilder(
-                future: TaskModel.getTasks(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData && snapshot.connectionState != ConnectionState.done) {
-                    return Center(child: CircularProgressIndicator(),);
-                  } else if (!snapshot.hasData) {
-                    return Center(child: Text('Adicione uma nova Tarefa'));
-                  } else {
-                    return ListView.separated(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return TaskElement(snapshot.data[index]);
-                      },
-                      separatorBuilder: (context, _) {
-                        return SizedBox(height: 8.0);
-                      }
-                    );
-                  }
-                },
+        child: Observer(builder: (_) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  tasksStore.tasks.isEmpty
+                      ? "Crie uma nova tarefa!"
+                      : 'Próximas tarefas',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 24.0),
+                ),
               ),
-            ),
-          ],
-        ),
+              SizedBox(height: 18.0),
+              Expanded(
+                child: tasksStore.isLoading ?
+                Center(child: CircularProgressIndicator(),) :
+                ListView.separated(
+                  itemCount: tasksStore.tasks.length,
+                  itemBuilder: (context, index) {
+                    return TaskElement(tasksStore.tasks[index]);
+                  },
+                  separatorBuilder: (context, _) {
+                    return SizedBox(height: 8.0);
+                  }
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

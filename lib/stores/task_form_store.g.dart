@@ -9,6 +9,12 @@ part of 'task_form_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TaskForm on _TaskFormBase, Store {
+  Computed<DateTime> _$deliverComputed;
+
+  @override
+  DateTime get deliver =>
+      (_$deliverComputed ??= Computed<DateTime>(() => super.deliver)).value;
+
   final _$deliverDateAtom = Atom(name: '_TaskFormBase.deliverDate');
 
   @override
@@ -96,7 +102,7 @@ mixin _$TaskForm on _TaskFormBase, Store {
   @override
   String toString() {
     final string =
-        'deliverDate: ${deliverDate.toString()},deliverTime: ${deliverTime.toString()},selectedFilter: ${selectedFilter.toString()}';
+        'deliverDate: ${deliverDate.toString()},deliverTime: ${deliverTime.toString()},selectedFilter: ${selectedFilter.toString()},deliver: ${deliver.toString()}';
     return '{$string}';
   }
 }

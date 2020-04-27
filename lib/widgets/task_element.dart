@@ -10,6 +10,7 @@ class TaskElement extends StatelessWidget {
     : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
 
   final String dateDeliver;
+  final TaskModel task;
 
   Color alertColor() {
     if (DateTime.now().isAfter(task.deliver))
@@ -20,12 +21,11 @@ class TaskElement extends StatelessWidget {
       return Colors.grey;
   }
 
-  final TaskModel task;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         boxShadow: boxShadowComponent(),

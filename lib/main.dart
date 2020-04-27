@@ -15,6 +15,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Color.fromRGBO(17, 39, 128, 1.0),
         accentColor: Color.fromRGBO(147, 229, 145, 1.0)
       ),
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+        child: child
+      ),
       home: HomePage(),
     );
   }

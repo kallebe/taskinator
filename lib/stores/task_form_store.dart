@@ -23,4 +23,13 @@ abstract class _TaskFormBase with Store {
 
   @action
   selectFilter(FilterModel filter) => selectedFilter = filter;
+
+  @computed
+  DateTime get deliver => DateTime(
+    deliverDate.year,
+    deliverDate.month,
+    deliverDate.day,
+    deliverTime.hour,
+    deliverTime.minute
+  );
 }

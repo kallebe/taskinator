@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:taskinator/components/appbar_component.dart';
-import 'package:taskinator/helpers/filter_helper.dart';
-import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/screens/new_task_screen.dart';
 import 'package:taskinator/widgets/filter_list.dart';
 import 'package:taskinator/widgets/tasks_list.dart';

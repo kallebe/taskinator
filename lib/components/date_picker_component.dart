@@ -8,7 +8,7 @@ import 'box_shadow_component.dart';
 Widget datePickerComponent(BuildContext context, {TaskForm taskForm}) {
 
   final DateFormat dateFormatter = DateFormat("dd/MM/yyyy");
-  final DateFormat timeFormatter = DateFormat("hh'h'mm");
+  final DateFormat timeFormatter = DateFormat("H'h'mm");
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,7 +87,7 @@ Future<Null> _pickDate(BuildContext context, {TaskForm taskForm}) async {
 
   final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: _now,
+      initialDate: taskForm.deliverDate,
       firstDate: DateTime(_now.year - 3),
       lastDate: DateTime(_now.year + 3));
   if (picked != null && picked != taskForm.deliverDate)
@@ -95,9 +95,11 @@ Future<Null> _pickDate(BuildContext context, {TaskForm taskForm}) async {
 }
 
 Future<Null> _pickTime(BuildContext context, {TaskForm taskForm}) async {
-  TimeOfDay _now = TimeOfDay.now();
-
   final TimeOfDay picked =
-      await showTimePicker(context: context, initialTime: _now);
+      await showTimePicker(
+        context: context,
+        initialTime: taskForm.deliverTime
+      );
   if (picked != null && picked != taskForm.deliverTime)
     taskForm.selectTime(picked);
+}

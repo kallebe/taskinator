@@ -16,13 +16,17 @@ class FilterHelper {
   }
 
   Future<FilterModel> getFilter(int id) async {
-    Database database = await DbHelper.internal().db;
-    List<Map> maps = await database.query(
-      filterTable,
-      columns: [filterIdColumn, filterTitleColumn, filterColorColumn],
-      where: "$filterIdColumn = ?",
-      whereArgs: [id]
-    );
+    List<Map> maps;
+
+    if (id != null) {
+      Database database = await DbHelper.internal().db;
+      maps = await database.query(
+        filterTable,
+        columns: [filterIdColumn, filterTitleColumn, filterColorColumn],
+        where: "$filterIdColumn = ?",
+        whereArgs: [id]
+      );
+    }
     
     if (maps.length > 0)
       return FilterModel.fromMap(maps.first);
