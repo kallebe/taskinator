@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:taskinator/helpers/db_helper.dart';
-import 'package:taskinator/helpers/filter_helper.dart';
-import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
 
 class TaskHelper {

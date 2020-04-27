@@ -34,7 +34,7 @@ class TasksList extends StatelessWidget {
                 ListView.separated(
                   itemCount: tasksStore.tasks.length,
                   itemBuilder: (context, index) {
-                    return TaskElement(tasksStore.tasks[index]);
+                    return TaskElement(tasksStore.tasks[index], tasksStore);
                   },
                   separatorBuilder: (context, _) {
                     return SizedBox(height: 8.0);

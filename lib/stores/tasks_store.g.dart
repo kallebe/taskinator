@@ -64,6 +64,16 @@ mixin _$TasksStore on _TasksStoreBase, Store {
   }
 
   @override
+  void removeTask(TaskModel task) {
+    final _$actionInfo = _$_TasksStoreBaseActionController.startAction();
+    try {
+      return super.removeTask(task);
+    } finally {
+      _$_TasksStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'isLoading: ${isLoading.toString()},tasks: ${tasks.toString()}';

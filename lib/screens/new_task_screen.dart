@@ -13,7 +13,7 @@ class NewTask extends StatelessWidget {
   final TasksStore tasksStore = TasksStore();
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController titleController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

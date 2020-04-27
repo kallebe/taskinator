@@ -39,4 +39,12 @@ abstract class _TasksStoreBase with Store {
     TaskModel.saveTask(task);
     isLoading = false;
   }
+
+  @action
+  void removeTask(TaskModel task) {
+    isLoading = true;
+    tasks.remove(task);
+    TaskModel.deleteTask(task);
+    isLoading = false;
+  }
 }

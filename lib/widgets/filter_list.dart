@@ -27,11 +27,16 @@ class FilterList extends StatelessWidget {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator(),);
           } else {
+            List<FilterModel> filters = snapshot.data;
+            filters.insert(0, FilterModel("Todos", Theme.of(context).accentColor));
+
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.length,
+              itemCount: filters.length + 1,
               itemBuilder: (context, index) {
-                return FilterElement(snapshot.data[index], index == this.currentFilter);
+                return index < filters.length ?
+                  FilterElement(filter: filters[index], isSelected: index == this.currentFilter) :
+                  FilterElement();
               },
             );
           }

@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flutter/material.dart';
 import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/helpers/task_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
@@ -62,5 +59,9 @@ class TaskModel {
 
   static void saveTask(TaskModel task) async {
     await TaskHelper().createTask(task);
+  }
+
+  static void deleteTask(TaskModel task) async {
+    await TaskHelper().deleteTask(task);
   }
 }
