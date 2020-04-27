@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:taskinator/models/filter_model.dart';
+import 'package:taskinator/stores/tasks_store.dart';
 part 'filters_store.g.dart';
 
 class FiltersStore = _FiltersStoreBase with _$FiltersStore;
@@ -41,10 +42,16 @@ abstract class _FiltersStoreBase with Store {
   }
 
   @action
-  void updateFilter(FilterModel filter) {
+  void updateFilter(FilterModel filter, TasksStore tasksStore) {
     isLoading = true;
-    filters.add(filter);
+
+    int idx = filters.indexWhere((f) => f.id == filter.id);
+    filters.removeAt(idx);
+    filters.insert(idx, filter);
+
     FilterModel.updateFilter(filter);
+    tasksStore.init();
+
     isLoading = false;
   }
 

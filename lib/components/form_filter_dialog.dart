@@ -7,8 +7,9 @@ import 'package:taskinator/components/text_field_component.dart';
 import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/stores/filter_form_store.dart';
 import 'package:taskinator/stores/filters_store.dart';
+import 'package:taskinator/stores/tasks_store.dart';
 
-void formFilterDialog(BuildContext context, FiltersStore filtersStore, {FilterModel filter}) {
+void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStore tasksStore, {FilterModel filter}) {
   bool create = filter == null;
   final FilterForm filterForm = FilterForm();
   final TextEditingController tituloController = TextEditingController();
@@ -17,6 +18,11 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, {FilterMo
     context: context,
     builder: (_) => Observer(
       builder: (_) {
+        if (!create) {
+          filterForm.setColor(filter.color);
+          filterForm.setTitle(filter.title);
+          tituloController.text = filter.title;
+        }
         return AlertDialog(
           title: Text(create ? "Nova categoria" : "Editar Categoria"),
           content: _buildContent(context, filterForm, tituloController),
@@ -35,9 +41,11 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, {FilterMo
             //! tituloController.text.isEmpty ?
             FlatButton(
               onPressed: () {
-                FilterModel filter = FilterModel(tituloController.text, filterForm.color);
-                print(tituloController.text + ", " + filterForm.color.toString());
-                create ? FilterModel.saveFilter(filter) : FilterModel.updateFilter(filter);
+                FilterModel f = FilterModel(tituloController.text, filterForm.color);
+                if (!create)
+                  f.setId(filter.id);
+
+                create ? filtersStore.addFilter(f) : filtersStore.updateFilter(f, tasksStore);
                 Navigator.of(context).pop();
               },
               child: Text(

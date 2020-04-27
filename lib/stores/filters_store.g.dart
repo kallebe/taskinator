@@ -64,10 +64,10 @@ mixin _$FiltersStore on _FiltersStoreBase, Store {
   }
 
   @override
-  void updateFilter(FilterModel filter) {
+  void updateFilter(FilterModel filter, TasksStore tasksStore) {
     final _$actionInfo = _$_FiltersStoreBaseActionController.startAction();
     try {
-      return super.updateFilter(filter);
+      return super.updateFilter(filter, tasksStore);
     } finally {
       _$_FiltersStoreBaseActionController.endAction(_$actionInfo);
     }

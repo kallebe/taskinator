@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FilterList(0, filtersStore),
+          FilterList(0, filtersStore, tasksStore),
           SizedBox(height: 20.0),
           TasksList(tasksStore)
         ],

@@ -3,14 +3,16 @@ import 'package:taskinator/components/box_shadow_component.dart';
 import 'package:taskinator/components/form_filter_dialog.dart';
 import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/stores/filters_store.dart';
+import 'package:taskinator/stores/tasks_store.dart';
 
 class FilterElement extends StatelessWidget {
 
   final FilterModel filter;
   final bool isSelected;
   final FiltersStore filtersStore;
+  final TasksStore tasksStore;
 
-  FilterElement({this.filter, this.isSelected, this.filtersStore});
+  FilterElement(this.filtersStore, this.tasksStore, {this.filter, this.isSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,10 @@ class FilterElement extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: filter == null ? (){
-          formFilterDialog(context, filtersStore);
+          formFilterDialog(context, filtersStore, tasksStore);
         } : () {},
         onLongPress: filter != null ? () {
-          formFilterDialog(context, filtersStore, filter: filter);
+          formFilterDialog(context, filtersStore, tasksStore, filter: filter);
         } : (){},
         child: Container(
           alignment: Alignment.center,
