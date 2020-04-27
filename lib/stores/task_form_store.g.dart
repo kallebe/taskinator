@@ -66,8 +66,35 @@ mixin _$TaskForm on _TaskFormBase, Store {
     }, _$selectedFilterAtom, name: '${_$selectedFilterAtom.name}_set');
   }
 
+  final _$titleAtom = Atom(name: '_TaskFormBase.title');
+
+  @override
+  String get title {
+    _$titleAtom.context.enforceReadPolicy(_$titleAtom);
+    _$titleAtom.reportObserved();
+    return super.title;
+  }
+
+  @override
+  set title(String value) {
+    _$titleAtom.context.conditionallyRunInAction(() {
+      super.title = value;
+      _$titleAtom.reportChanged();
+    }, _$titleAtom, name: '${_$titleAtom.name}_set');
+  }
+
   final _$_TaskFormBaseActionController =
       ActionController(name: '_TaskFormBase');
+
+  @override
+  void setTitile(String t) {
+    final _$actionInfo = _$_TaskFormBaseActionController.startAction();
+    try {
+      return super.setTitile(t);
+    } finally {
+      _$_TaskFormBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic selectDate(DateTime date) {
@@ -102,7 +129,7 @@ mixin _$TaskForm on _TaskFormBase, Store {
   @override
   String toString() {
     final string =
-        'deliverDate: ${deliverDate.toString()},deliverTime: ${deliverTime.toString()},selectedFilter: ${selectedFilter.toString()},deliver: ${deliver.toString()}';
+        'deliverDate: ${deliverDate.toString()},deliverTime: ${deliverTime.toString()},selectedFilter: ${selectedFilter.toString()},title: ${title.toString()},deliver: ${deliver.toString()}';
     return '{$string}';
   }
 }

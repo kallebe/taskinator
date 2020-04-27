@@ -36,6 +36,11 @@ class FilterHelper {
 
   Future<bool> deleteFilter(FilterModel filter) async {
     Database database = await DbHelper.internal().db;
+    await database.delete(
+      tasksTable,
+      where: "$tasksFilterColumn = ?",
+      whereArgs: [filter.id]
+    );
     int rows = await database.delete(
       filterTable,
       where: "$filterIdColumn = ?",

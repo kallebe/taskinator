@@ -39,4 +39,16 @@ class FilterModel extends Model {
   static Future<List<FilterModel>> getFilters() async {
     return await FilterHelper().getFilters();
   }
+
+  static void saveFilter(FilterModel filter) async {
+    await FilterHelper().createFilter(filter);
+  }
+
+  static void updateFilter(FilterModel filter) async {
+    await FilterHelper().updateFilter(filter);
+  }
+
+  static void deleteFilter(FilterModel filter) async {
+    await FilterHelper().deleteFilter(filter);
+  }
 }

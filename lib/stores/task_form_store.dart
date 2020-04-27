@@ -15,6 +15,12 @@ abstract class _TaskFormBase with Store {
   @observable
   FilterModel selectedFilter = FilterModel('', Colors.white);
 
+  @observable
+  String title = "";
+
+  @action
+  void setTitile(String t) => title = t; 
+
   @action
   selectDate(DateTime date) => deliverDate = date;
 
