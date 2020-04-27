@@ -56,10 +56,11 @@ abstract class _FiltersStoreBase with Store {
   }
 
   @action
-  void removeFilter(FilterModel filter) {
+  void removeFilter(FilterModel filter, TasksStore tasksStore) {
     isLoading = true;
     filters.remove(filter);
     FilterModel.deleteFilter(filter);
+    tasksStore.init();
     isLoading = false;
   }
 }

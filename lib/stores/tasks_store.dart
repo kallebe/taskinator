@@ -26,6 +26,8 @@ abstract class _TasksStoreBase with Store {
     } else {
       tasks = ts.asObservable();
     }
+
+    sortTasks();
     
     isLoading = false;
   }
@@ -35,11 +37,11 @@ abstract class _TasksStoreBase with Store {
     isLoading = true;
     tasks.add(task);
     TaskModel.saveTask(task);
+    sortTasks();
     isLoading = false;
   }
 
-  @computed
-  get sortTasks {
+  void sortTasks() {
     tasks.sort((a, b) => a.deliver.isAfter(b.deliver) ? 1 : 0);
   }
 
@@ -48,6 +50,7 @@ abstract class _TasksStoreBase with Store {
     isLoading = true;
     tasks.remove(task);
     TaskModel.deleteTask(task);
+    sortTasks();
     isLoading = false;
   }
 }

@@ -30,7 +30,7 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
             FlatButton(
               onPressed: () {
                 if (!create)
-                  FilterModel.deleteFilter(filter);
+                  filtersStore.removeFilter(filter, tasksStore);
                 Navigator.of(context).pop();
               },
               child: Text(
@@ -38,7 +38,6 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
                 style: TextStyle(color: create ? Colors.grey : Colors.red),
               ),
             ),
-            //! tituloController.text.isEmpty ?
             FlatButton(
               onPressed: () {
                 FilterModel f = FilterModel(tituloController.text, filterForm.color);
@@ -53,7 +52,6 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
                 style: TextStyle(color: Theme.of(context).accentColor),
               ),
             )
-            //! SizedBox(width: 0,)
           ],
         );
       },

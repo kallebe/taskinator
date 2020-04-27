@@ -74,10 +74,10 @@ mixin _$FiltersStore on _FiltersStoreBase, Store {
   }
 
   @override
-  void removeFilter(FilterModel filter) {
+  void removeFilter(FilterModel filter, TasksStore tasksStore) {
     final _$actionInfo = _$_FiltersStoreBaseActionController.startAction();
     try {
-      return super.removeFilter(filter);
+      return super.removeFilter(filter, tasksStore);
     } finally {
       _$_FiltersStoreBaseActionController.endAction(_$actionInfo);
     }
