@@ -46,8 +46,8 @@ mixin _$FiltersStore on _FiltersStoreBase, Store {
   final _$initAsyncAction = AsyncAction('init');
 
   @override
-  Future init() {
-    return _$initAsyncAction.run(() => super.init());
+  Future init(BuildContext context) {
+    return _$initAsyncAction.run(() => super.init(context));
   }
 
   final _$_FiltersStoreBaseActionController =

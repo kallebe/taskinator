@@ -9,6 +9,12 @@ part of 'tasks_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TasksStore on _TasksStoreBase, Store {
+  Computed<dynamic> _$sortTasksComputed;
+
+  @override
+  dynamic get sortTasks =>
+      (_$sortTasksComputed ??= Computed<dynamic>(() => super.sortTasks)).value;
+
   final _$isLoadingAtom = Atom(name: '_TasksStoreBase.isLoading');
 
   @override
@@ -76,7 +82,7 @@ mixin _$TasksStore on _TasksStoreBase, Store {
   @override
   String toString() {
     final string =
-        'isLoading: ${isLoading.toString()},tasks: ${tasks.toString()}';
+        'isLoading: ${isLoading.toString()},tasks: ${tasks.toString()},sortTasks: ${sortTasks.toString()}';
     return '{$string}';
   }
 }

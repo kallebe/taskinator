@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:taskinator/models/filter_model.dart';
 part 'filters_store.g.dart';
@@ -5,8 +6,8 @@ part 'filters_store.g.dart';
 class FiltersStore = _FiltersStoreBase with _$FiltersStore;
 
 abstract class _FiltersStoreBase with Store {
-  _FiltersStoreBase() {
-    init();
+  _FiltersStoreBase(BuildContext context) {
+    init(context);
   }
 
   @observable
@@ -16,7 +17,7 @@ abstract class _FiltersStoreBase with Store {
   ObservableList<FilterModel> filters = ObservableList<FilterModel>();
 
   @action
-  init() async {
+  init(BuildContext context) async {
     isLoading = true;
 
     List<FilterModel> fs = await FilterModel.getFilters();
@@ -25,6 +26,8 @@ abstract class _FiltersStoreBase with Store {
     } else {
       filters = fs.asObservable();
     }
+
+    filters.insert(0, FilterModel("Todos", Theme.of(context).accentColor));
     
     isLoading = false;
   }

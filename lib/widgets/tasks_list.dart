@@ -4,7 +4,10 @@ import 'package:taskinator/stores/tasks_store.dart';
 import 'package:taskinator/widgets/task_element.dart';
 
 class TasksList extends StatelessWidget {
-  final TasksStore tasksStore = TasksStore();
+
+  TasksList(this.tasksStore);
+
+  final TasksStore tasksStore;
 
   @override
   Widget build(BuildContext context) {

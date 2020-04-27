@@ -9,8 +9,10 @@ import 'package:taskinator/stores/task_form_store.dart';
 import 'package:taskinator/stores/tasks_store.dart';
 
 class NewTask extends StatelessWidget {
+  NewTask(this.tasksStore);
+
   final TaskForm taskForm = TaskForm();
-  final TasksStore tasksStore = TasksStore();
+  final TasksStore tasksStore;
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();

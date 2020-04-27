@@ -6,16 +6,15 @@ import 'package:taskinator/widgets/filter_element.dart';
 
 class FilterList extends StatelessWidget {
 
-  FilterList(this.currentFilter);
+  FilterList(this.currentFilter, this.filtersStore);
   final int currentFilter;
-  final FiltersStore filtersStore = FiltersStore();
+  final FiltersStore filtersStore;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
         List<FilterModel> filters = filtersStore.filters;
-        filters.insert(0, FilterModel("Todos", Theme.of(context).accentColor));
 
         return SizedBox(
           height: 50.0,
