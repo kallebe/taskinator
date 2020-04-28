@@ -35,6 +35,7 @@ class TasksList extends StatelessWidget {
                 child: tasksStore.isLoading ?
                 Center(child: CircularProgressIndicator(),) :
                 ListView.separated(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
                   itemCount: tasksStore.tasks.length,
                   itemBuilder: (context, index) {
                     return TaskElement(tasksStore.tasks[index], tasksStore);
