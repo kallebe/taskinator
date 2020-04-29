@@ -41,6 +41,19 @@ abstract class _TasksStoreBase with Store {
     isLoading = false;
   }
 
+  @action
+  void updateTask(TaskModel task) {
+    isLoading = true;
+
+    int idx = tasks.indexWhere((f) => f.id == task.id);
+    tasks.removeAt(idx);
+    tasks.insert(idx, task);
+
+    TaskModel.updateTask(task);
+
+    isLoading = false;
+  }
+
   void sortTasks() {
     tasks.sort((a, b) => a.deliver.isAfter(b.deliver) ? 1 : 0);
   }

@@ -61,6 +61,10 @@ class TaskModel {
     await TaskHelper().createTask(task);
   }
 
+  static void updateTask(TaskModel task) async {
+    await TaskHelper().updateTask(task);
+  }
+
   static void deleteTask(TaskModel task) async {
     await TaskHelper().deleteTask(task);
   }

@@ -25,7 +25,7 @@ Widget selectFilterComponent({TaskForm taskForm}) {
             underline: SizedBox(
               height: 0,
             ),
-            value: taskForm.selectedFilter.id ?? filters[0].id,
+            value: taskForm.selectedFilter.id ?? filters[1].id,
             isExpanded: true,
             items: filters.map((filter) {
               return DropdownMenuItem<int>(
