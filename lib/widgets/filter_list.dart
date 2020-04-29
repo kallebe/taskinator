@@ -28,7 +28,7 @@ class FilterList extends StatelessWidget {
               itemBuilder: (context, index) {
                 return index < filters.length ?
                   FilterElement(filtersStore, tasksStore, filter: filters[index], isSelected: index == this.currentFilter) :
-                  FilterElement(filtersStore, tasksStore);
+                  FilterElement(filtersStore, tasksStore, isSelected:  index == 0);
               },
             )
         );

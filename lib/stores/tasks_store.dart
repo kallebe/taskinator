@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
+import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
+import 'package:taskinator/stores/filters_store.dart';
 part 'tasks_store.g.dart';
 
 class TasksStore = _TasksStoreBase with _$TasksStore;
@@ -40,6 +42,35 @@ abstract class _TasksStoreBase with Store {
     sortTasks();
     isLoading = false;
   }
+
+  @action
+  filterTasks(FilterModel filter, FiltersStore filtersStore) async {
+    isLoading = true;
+    
+    List<TaskModel> ts;
+
+    if (filter.id == null) {
+      ts = await TaskModel.getTasks();
+      fIndex = 0;
+    }
+    else {
+      ts = await TaskModel.filterTasks(filter);
+      fIndex = filtersStore.filters.indexOf(filter);
+    }
+    
+    if (ts == null) {
+      tasks = <TaskModel>[].asObservable();
+    } else {
+      tasks = ts.asObservable();
+    }
+
+    sortTasks();
+
+    isLoading = false;
+  }
+
+  @observable
+  int fIndex = 0;
 
   @action
   void updateTask(TaskModel task) {

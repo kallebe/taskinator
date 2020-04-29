@@ -65,6 +65,12 @@ class TaskModel {
     await TaskHelper().updateTask(task);
   }
 
+  static Future<List<TaskModel>> filterTasks(FilterModel filter) async {
+    List<TaskModel> filters = await TaskHelper().getTasks(filterId: filter.id);
+
+    return filters;
+  }
+
   static void deleteTask(TaskModel task) async {
     await TaskHelper().deleteTask(task);
   }

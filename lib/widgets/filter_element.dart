@@ -21,7 +21,9 @@ class FilterElement extends StatelessWidget {
       child: GestureDetector(
         onTap: filter == null ? (){
           formFilterDialog(context, filtersStore, tasksStore);
-        } : () {},
+        } : () {
+          tasksStore.filterTasks(filter, filtersStore);
+        },
         onLongPress: filter != null ? () {
           formFilterDialog(context, filtersStore, tasksStore, filter: filter);
         } : (){},

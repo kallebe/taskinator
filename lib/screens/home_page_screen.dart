@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:taskinator/components/appbar_component.dart';
 import 'package:taskinator/screens/new_task_screen.dart';
@@ -13,26 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
     initializeDateFormatting();
   }
 
-  final PageController filterController = PageController();
-
   @override
   Widget build(BuildContext context) {
     final TasksStore tasksStore = TasksStore();
     final FiltersStore filtersStore = FiltersStore(context);
-    
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => NewTask(tasksStore)
-          ));
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => NewTask(tasksStore)));
         },
         child: Icon(
           Icons.add,
@@ -43,7 +40,9 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FilterList(0, filtersStore, tasksStore),
+          Observer(builder: (_) {
+            return FilterList(tasksStore.fIndex, filtersStore, tasksStore);
+          }),
           SizedBox(height: 20.0),
           TasksList(tasksStore)
         ],

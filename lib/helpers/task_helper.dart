@@ -51,11 +51,14 @@ class TaskHelper {
     return rows > 0;
   }
 
-  Future<List<TaskModel>> getTasks() async {
+  Future<List<TaskModel>> getTasks({int filterId}) async {
     Database database = await DbHelper.internal().db;
     List<TaskModel> tasks = [];
+
     List<Map<String, dynamic>> maps = await database.rawQuery(
-      "SELECT * from $tasksTable ORDER BY $tasksDeliverColumn DESC"
+      "SELECT * FROM $tasksTable " +
+      (filterId != null ? "WHERE $tasksFilterColumn = $filterId " : "") +
+      "ORDER BY $tasksDeliverColumn DESC"
     );
     maps.forEach((map) {
       tasks.add(TaskModel.fromMap(map));

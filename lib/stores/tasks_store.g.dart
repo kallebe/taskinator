@@ -43,11 +43,36 @@ mixin _$TasksStore on _TasksStoreBase, Store {
     }, _$tasksAtom, name: '${_$tasksAtom.name}_set');
   }
 
+  final _$fIndexAtom = Atom(name: '_TasksStoreBase.fIndex');
+
+  @override
+  int get fIndex {
+    _$fIndexAtom.context.enforceReadPolicy(_$fIndexAtom);
+    _$fIndexAtom.reportObserved();
+    return super.fIndex;
+  }
+
+  @override
+  set fIndex(int value) {
+    _$fIndexAtom.context.conditionallyRunInAction(() {
+      super.fIndex = value;
+      _$fIndexAtom.reportChanged();
+    }, _$fIndexAtom, name: '${_$fIndexAtom.name}_set');
+  }
+
   final _$initAsyncAction = AsyncAction('init');
 
   @override
   Future init() {
     return _$initAsyncAction.run(() => super.init());
+  }
+
+  final _$filterTasksAsyncAction = AsyncAction('filterTasks');
+
+  @override
+  Future filterTasks(FilterModel filter, FiltersStore filtersStore) {
+    return _$filterTasksAsyncAction
+        .run(() => super.filterTasks(filter, filtersStore));
   }
 
   final _$_TasksStoreBaseActionController =
@@ -58,6 +83,16 @@ mixin _$TasksStore on _TasksStoreBase, Store {
     final _$actionInfo = _$_TasksStoreBaseActionController.startAction();
     try {
       return super.addTask(task);
+    } finally {
+      _$_TasksStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateTask(TaskModel task) {
+    final _$actionInfo = _$_TasksStoreBaseActionController.startAction();
+    try {
+      return super.updateTask(task);
     } finally {
       _$_TasksStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -76,7 +111,7 @@ mixin _$TasksStore on _TasksStoreBase, Store {
   @override
   String toString() {
     final string =
-        'isLoading: ${isLoading.toString()},tasks: ${tasks.toString()}';
+        'isLoading: ${isLoading.toString()},tasks: ${tasks.toString()},fIndex: ${fIndex.toString()}';
     return '{$string}';
   }
 }
