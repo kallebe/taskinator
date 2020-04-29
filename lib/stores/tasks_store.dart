@@ -27,7 +27,9 @@ abstract class _TasksStoreBase with Store {
       tasks = <TaskModel>[].asObservable();
     } else {
       tasks = ts.asObservable();
+      fIndex = 0;
     }
+
 
     sortTasks();
     

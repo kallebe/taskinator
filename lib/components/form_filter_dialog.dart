@@ -29,8 +29,9 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
           actions: <Widget>[
             FlatButton(
               onPressed: () {
-                if (!create)
+                if (!create) {
                   filtersStore.removeFilter(filter, tasksStore);
+                }
                 Navigator.of(context).pop();
               },
               child: Text(
@@ -39,14 +40,14 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
               ),
             ),
             FlatButton(
-              onPressed: () {
+              onPressed: tituloController.text.isNotEmpty ? () {
                 FilterModel f = FilterModel(tituloController.text, filterForm.color);
                 if (!create)
                   f.setId(filter.id);
 
                 create ? filtersStore.addFilter(f) : filtersStore.updateFilter(f, tasksStore);
                 Navigator.of(context).pop();
-              },
+              } : () {},
               child: Text(
                 create ? "Criar" : "Salvar",
                 style: TextStyle(color: Theme.of(context).accentColor),
@@ -62,7 +63,7 @@ void formFilterDialog(BuildContext context, FiltersStore filtersStore, TasksStor
 Widget _buildContent(BuildContext context, FilterForm filterForm, TextEditingController tituloController) {
 
   return Container(
-    padding: EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(8.0),
     child: ListView(
       shrinkWrap: true,
       children: <Widget>[
@@ -75,14 +76,12 @@ Widget _buildContent(BuildContext context, FilterForm filterForm, TextEditingCon
 
 Widget _selectColor(FilterForm filterForm) {
   return LimitedBox(
-    maxHeight: 200,
+    maxHeight: 250,
     child: Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        boxShadow: boxShadowComponent(),
-        color: Colors.white
-      ),
+      padding: const EdgeInsets.all(6.0),
+      color: Colors.white,
       child: MaterialColorPicker(
+        circleSize: 50.0,
         selectedColor: filterForm.color,
         onColorChange: (c) { filterForm.setColor(c); },
       ),
