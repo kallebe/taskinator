@@ -30,15 +30,23 @@ class TaskElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key(task.id.toString()),
+      direction: DismissDirection.endToStart,
       onDismissed: (direction) {
         if (direction == DismissDirection.endToStart)
           tasksStore.removeTask(task);
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Parabéns! Mais uma tarefa concluída!'))
+          );
       },
       background: Container(
-        color: Theme.of(context).accentColor
-      ),
-      secondaryBackground: Container(
-        color: Colors.red,
+        color: Theme.of(context).accentColor,
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.only(right: 24.0),
+        child: Icon(
+          Icons.done,
+          color: Colors.white,
+        ),
       ),
       child: GestureDetector(
         onTap: () {
