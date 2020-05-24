@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/stores/filters_store.dart';
 import 'package:taskinator/stores/task_form_store.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:taskinator/components/box_shadow_component.dart';
 import 'package:taskinator/components/form_field_component.dart';
 import 'package:taskinator/components/text_field_component.dart';
 import 'package:taskinator/models/filter_model.dart';
