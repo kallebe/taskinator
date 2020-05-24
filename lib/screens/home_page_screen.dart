@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => NewTask(tasksStore)));
+              MaterialPageRoute(builder: (context) => NewTask(filtersStore, tasksStore)));
         },
         child: Icon(
           Icons.add,
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             return FilterList(tasksStore.fIndex, filtersStore, tasksStore);
           }),
           SizedBox(height: 20.0),
-          TasksList(tasksStore)
+          TasksList(tasksStore, filtersStore)
         ],
       ),
     );

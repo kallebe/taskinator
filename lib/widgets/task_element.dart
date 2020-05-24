@@ -4,16 +4,18 @@ import 'package:taskinator/components/box_shadow_component.dart';
 import 'package:taskinator/helpers/filter_helper.dart';
 import 'package:taskinator/models/task_model.dart';
 import 'package:taskinator/screens/new_task_screen.dart';
+import 'package:taskinator/stores/filters_store.dart';
 import 'package:taskinator/stores/tasks_store.dart';
 
 class TaskElement extends StatelessWidget {
 
-  TaskElement(this.task, this.tasksStore)
+  TaskElement(this.task, this.tasksStore, this.filtersStore)
     : dateDeliver = DateFormat("dd MMM. H'h'mm", "pt_BR").format(task.deliver);
 
   final String dateDeliver;
   final TaskModel task;
   final TasksStore tasksStore;
+  final FiltersStore filtersStore;
 
   Color alertColor() {
     if (DateTime.now().isAfter(task.deliver))
@@ -40,7 +42,7 @@ class TaskElement extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewTask(tasksStore, task: task)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewTask(filtersStore, tasksStore, task: task)));
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0),

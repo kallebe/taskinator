@@ -6,14 +6,16 @@ import 'package:taskinator/components/select_filter_component.dart';
 import 'package:taskinator/components/text_field_component.dart';
 import 'package:taskinator/models/filter_model.dart';
 import 'package:taskinator/models/task_model.dart';
+import 'package:taskinator/stores/filters_store.dart';
 import 'package:taskinator/stores/task_form_store.dart';
 import 'package:taskinator/stores/tasks_store.dart';
 
 class NewTask extends StatelessWidget {
-  NewTask(this.tasksStore, {this.task});
+  NewTask(this.filtersStore, this.tasksStore, {this.task});
 
   final TaskForm taskForm = TaskForm();
   final TasksStore tasksStore;
+  final FiltersStore filtersStore;
   final TaskModel task;
 
   final _formKey = GlobalKey<FormState>();
@@ -39,7 +41,7 @@ class NewTask extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: <Widget>[
-            formFieldComponent("Categoria", selectFilterComponent(taskForm: taskForm)),
+            formFieldComponent("Categoria", selectFilterComponent(filtersStore, taskForm: taskForm)),
             formFieldComponent("Título", textFieldComponent(titleController, hint: "Ex.: Avaliar Taskinator")),
             datePickerComponent(context, taskForm: taskForm),
             SizedBox(height: 16.0,),
